@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreFront.UI.MVC", "StoreFront.UI.MVC\StoreFront.UI.MVC.csproj", "{AF880D69-6D0D-42A8-9D1A-48F2B7EDBCC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF880D69-6D0D-42A8-9D1A-48F2B7EDBCC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF880D69-6D0D-42A8-9D1A-48F2B7EDBCC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF880D69-6D0D-42A8-9D1A-48F2B7EDBCC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF880D69-6D0D-42A8-9D1A-48F2B7EDBCC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C1640EFC-58B5-4F1C-997C-60CD62346ACA}
+	EndGlobalSection
+EndGlobal
