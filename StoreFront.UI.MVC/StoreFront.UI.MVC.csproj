@@ -34,4 +34,8 @@
     <Folder Include="wwwroot\_Archive\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StoreFront.DATA.EF\StoreFront.DATA.EF.csproj" />
+  </ItemGroup>
+
 </Project>
