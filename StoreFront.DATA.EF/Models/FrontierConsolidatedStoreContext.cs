@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace StoreFront.UI.MVC.Models
+namespace StoreFront.DATA.EF.Models
 {
     public partial class FrontierConsolidatedStoreContext : DbContext
     {
