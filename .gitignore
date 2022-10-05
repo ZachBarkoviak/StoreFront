@@ -363,4 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # appsettings
-/StoreFront/StoreFront.UI.MVC/appsettings.json
+appsettings.json
