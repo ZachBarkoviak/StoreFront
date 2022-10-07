@@ -16,7 +16,9 @@ namespace StoreFront.DATA.EF.Models
         public string ProductName { get; set; } = null!;
         public string ProductImage { get; set; } = null!;
 
-        public virtual Category Category { get; set; } = null!;
-        public virtual Manufacturer Manufacturer { get; set; } = null!;
+        //public virtual Category Category { get; set; } = null!;
+        public virtual Category? Category { get; set; }
+        //public virtual Manufacturer Manufacturer { get; set; } = null!;
+        public virtual Manufacturer? Manufacturer { get; set; }
     }
 }

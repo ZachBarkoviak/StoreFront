@@ -287,3 +287,8 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+.img-fluid.productImg {
+    border-radius: 20px;
+    padding: 5px;
+}

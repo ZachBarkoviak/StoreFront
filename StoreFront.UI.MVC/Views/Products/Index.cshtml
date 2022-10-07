@@ -1,83 +1,111 @@
 ﻿@model IEnumerable<StoreFront.DATA.EF.Models.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Shop";
 }
 
-<h1>Index</h1>
+<div class="row">
+    <div class="col-md-6 offset-3 pt-3 pb-3 text-center">
+        <h2 class="text-primary">All Products</h2>
+        <p>
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Create" class="btn btn-success">Add Product</a>
+            }       
+            <a asp-action="TiledView" class="btn btn-success">Tile View</a>
+        </p>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockQty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitsOrdered)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StockStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StockQty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitsOrdered)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer.ManufacturerName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+<div class="col-md-6 offset-3 text-center">
+    <div class="bg-secondary rounded h-100 p-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductPrice)
+                    </th>
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.ProductDescription)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.StockStatus)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.StockQty)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.UnitsOrdered)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Manufacturer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductImage)
+                    </th>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <th>Actions</th>                        
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ProductId">
+                                @Html.DisplayFor(modelItem => item.ProductName)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductPrice)
+                        </td>
+                        @*<td>
+                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.StockStatus)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.StockQty)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.UnitsOrdered)
+                    </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Manufacturer.ManufacturerName)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ProductId">
+                                <img class="img-fluid" src="~/img/t_@item.ProductImage" alt="@item.ProductDescription" />
+                            </a>                            
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                           <td>
+                                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                            </td> 
+                        }
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

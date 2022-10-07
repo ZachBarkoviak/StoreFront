@@ -1,0 +1,48 @@
+﻿@model IEnumerable<StoreFront.DATA.EF.Models.Product>
+
+@{
+    ViewData["Title"] = "TiledView";
+}
+
+
+<div class="row">
+    <div class="col-md-6 offset-3 pt-3 pb-3 text-center">
+        <h2 class="text-primary">All Products</h2>
+        <p>
+            @if (User.IsInRole("Admin"))
+            {
+                    <a asp-action="Create" class="btn btn-success">Add Product</a>
+            }       
+            <a asp-action="Index" class="btn btn-success">List View</a>
+        </p>
+    </div>
+</div>
+
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-4 py-3">
+            <div class="box bg-secondary rounded text-center">
+                <div class="img-box">
+                    <a asp-action="Details" asp-route-id="@item.ProductId">
+                        <img class="img-fluid productImg" src="~/img/t_@item.ProductImage" alt="@item.ProductName" longdesc="@item.ProductDescription" />
+                    </a>                    
+                </div>
+                <div class="text-center p-1">
+                    <h5>
+                        @item.ProductName
+                    </h5>
+                    <h6 class="">
+                        @Html.DisplayFor(modelItem => item.ProductPrice)
+                    </h6>
+                </div>
+                <a href="javascript:void(0)" class="btn btn-danger mb-2">
+                    Add to Cart
+                </a>
+            </div>
+        </div>
+    }
+
+</div>

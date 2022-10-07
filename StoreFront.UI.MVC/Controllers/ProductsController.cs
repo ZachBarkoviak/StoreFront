@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,23 +10,35 @@ using StoreFront.DATA.EF.Models;
 
 namespace StoreFront.UI.MVC.Controllers
 {
+    
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private readonly FrontierConsolidatedStoreContext _context;
-
         public ProductsController(FrontierConsolidatedStoreContext context)
         {
             _context = context;
         }
 
         // GET: Products
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var frontierConsolidatedStoreContext = _context.Products.Include(p => p.Category).Include(p => p.Manufacturer);
-            return View(await frontierConsolidatedStoreContext.ToListAsync());
+            var products = _context.Products.Include(p => p.Category).Include(p => p.Manufacturer);
+            return View(await products.ToListAsync());
         }
 
+        // Tile View
+        [AllowAnonymous]
+        public async Task<IActionResult> TiledView()
+        {
+            var products = _context.Products.Include(p => p.Category).Include(p => p.Manufacturer);
+            return View(await products.ToListAsync());
+        }
+
+
         // GET: Products/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Products == null)

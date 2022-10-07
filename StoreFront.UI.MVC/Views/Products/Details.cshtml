@@ -1,12 +1,75 @@
 ﻿@model StoreFront.DATA.EF.Models.Product
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.ProductName;
 }
 
-<h1>Details</h1>
+<div class="row">
+    <div class="col-md-6 offset-3 pt-3 pb-3 text-center">
+        <h2 class="text-primary">@Model.ProductName <span>Details</span></h2>
+    </div>
+</div>
 
-<div>
+<div class="row mb-3 text-center">
+    <div class="col-md-6 offset-0 offset-md-3 justify-content-center">
+        <img src="~/img/@Model.ProductImage" alt="@Model.ProductName" longdesc="@Model.ProductDescription" class="img-fluid productImg" />
+        <p class="text-danger mt-3">
+            @Html.DisplayFor(model => model.ProductDescription)
+        </p>
+    </div>
+    <div class="col-md-4 offset-2">
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.ProductPrice):
+            </strong>
+            @Html.DisplayFor(model => model.ProductPrice)
+        </p>
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.StockQty):
+            </strong>
+            @Html.DisplayFor(model => model.StockQty)
+        </p>
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.UnitsOrdered):
+            </strong>
+            @Html.DisplayFor(model => model.UnitsOrdered)
+        </p>
+    </div>
+    <div class="col-md-4">
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.Category):
+            </strong>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </p>
+        <p>
+            <strong>
+                @Html.DisplayNameFor(model => model.Manufacturer):
+            </strong>
+            @Html.DisplayFor(model => model.Manufacturer.ManufacturerName)
+        </p>
+        <p>
+            <strong>
+                Discontinued? :
+            </strong>
+            @{
+                string lineText = Model.StockStatus ? "No" : "Yes";
+            }
+            @lineText
+        </p>
+    </div>
+    <div class="col-12 col-md-6 offset-md-3">
+        <a asp-action="TiledView" class="btn btn-primary w-100 d-inline-block">Back to Products</a>
+    </div>
+</div>
+
+
+
+
+
+@*<div>
     <h4>Product</h4>
     <hr />
     <dl class="row">
@@ -65,8 +128,8 @@
             @Html.DisplayFor(model => model.Manufacturer.ManufacturerName)
         </dd>
     </dl>
-</div>
-<div>
+</div>*@
+@*<div>
     <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <a asp-action="Index">Back to Products</a>
+</div>*@
