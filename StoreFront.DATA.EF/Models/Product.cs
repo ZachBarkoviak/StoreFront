@@ -14,7 +14,7 @@ namespace StoreFront.DATA.EF.Models
         public int StockQty { get; set; }
         public int? UnitsOrdered { get; set; }
         public string ProductName { get; set; } = null!;
-        public string ProductImage { get; set; } = null!;
+        public string? ProductImage { get; set; }
 
         //public virtual Category Category { get; set; } = null!;
         public virtual Category? Category { get; set; }

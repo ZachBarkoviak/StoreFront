@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +33,7 @@ namespace StoreFront.DATA.EF.Models//.Metadata
     [ModelMetadataType(typeof(ProductMetadata))]
     public partial class Product
     {
-
+        [NotMapped]
+        public IFormFile? Image { get; set; }
     }
 }
