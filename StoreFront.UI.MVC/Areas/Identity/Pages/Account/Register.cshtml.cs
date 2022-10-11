@@ -16,8 +16,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using StoreFront.DATA.EF.Models;
 
 namespace StoreFront.UI.MVC.Areas.Identity.Pages.Account
 {
@@ -97,13 +100,34 @@ namespace StoreFront.UI.MVC.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "Maximum Characters: 50")]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "Maximum Characters: 50")]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "Planet ID")]
+            public int PlanetId { get; set; }
+
+            [StringLength(24, ErrorMessage = "Maximum Characters: 10")]
+            [DataType(DataType.PhoneNumber, ErrorMessage = "Must be a valid phone number")]
+            [Display(Name = "Phone Number")]
+            public string? PhoneNumber { get; set; }
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            FrontierConsolidatedStoreContext _context = new FrontierConsolidatedStoreContext();
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            ViewData["PlanetId"] = new SelectList(_context.Planets, "PlanetId", "PlanetName");
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -123,6 +147,26 @@ namespace StoreFront.UI.MVC.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+
+                    #region Extend Identity
+                    FrontierConsolidatedStoreContext _context = new FrontierConsolidatedStoreContext();
+
+                    UserDetail userDetail = new UserDetail()
+                    {
+                        UserId = userId,
+                        FirstName = Input.FirstName,
+                        LastName = Input.LastName,
+                        PlanetId = Input.PlanetId,
+                        PhoneNumber = Input.PhoneNumber
+                    };
+
+                    _context.UserDetails.Add(userDetail);
+                    _context.SaveChanges();
+
+
+                    #endregion
+
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

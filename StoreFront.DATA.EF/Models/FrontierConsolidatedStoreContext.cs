@@ -26,6 +26,7 @@ namespace StoreFront.DATA.EF.Models
         public virtual DbSet<Manufacturer> Manufacturers { get; set; } = null!;
         public virtual DbSet<Planet> Planets { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<UserDetail> UserDetails { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -207,6 +208,29 @@ namespace StoreFront.DATA.EF.Models
                     .HasForeignKey(d => d.ManufacturerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Products_Manufacturer");
+            });
+
+            modelBuilder.Entity<UserDetail>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.ToTable("UserDetail");
+
+                entity.Property(e => e.UserId).HasMaxLength(128);
+
+                entity.Property(e => e.FirstName).HasMaxLength(50);
+
+                entity.Property(e => e.LastName).HasMaxLength(50);
+
+                entity.Property(e => e.PhoneNumber)
+                    .HasMaxLength(10)
+                    .IsFixedLength();
+
+                entity.HasOne(d => d.Planet)
+                    .WithMany(p => p.UserDetails)
+                    .HasForeignKey(d => d.PlanetId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserDetail_Planets");
             });
 
             OnModelCreatingPartial(modelBuilder);

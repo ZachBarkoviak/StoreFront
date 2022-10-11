@@ -8,6 +8,7 @@ namespace StoreFront.DATA.EF.Models
         public Planet()
         {
             Manufacturers = new HashSet<Manufacturer>();
+            UserDetails = new HashSet<UserDetail>();
         }
 
         public int PlanetId { get; set; }
@@ -15,5 +16,6 @@ namespace StoreFront.DATA.EF.Models
         public string? PlanetCapital { get; set; }
 
         public virtual ICollection<Manufacturer> Manufacturers { get; set; }
+        public virtual ICollection<UserDetail> UserDetails { get; set; }
     }
 }
