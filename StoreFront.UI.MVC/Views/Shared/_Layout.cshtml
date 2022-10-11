@@ -64,7 +64,7 @@
                     </div>
                     </div>*@
                     @*<a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>*@
-                    <a asp-action="Index" asp-controller="Products" class="nav-item nav-link @(ViewData["Title"] == "Shop" ? Html.Raw("active") : Html.Raw(""))"><i class="fa fa-laptop me-2"></i>Shop</a>
+                    <a asp-action="TiledView" asp-controller="Products" class="nav-item nav-link @(ViewData["Title"] == "Shop" ? Html.Raw("active") : Html.Raw(""))"><i class="fa fa-laptop me-2"></i>Shop</a>
                     <a href="@Url.Action("Table", "Home")" class="nav-item nav-link @(ViewData["Title"] == "Table" ? Html.Raw("active") : Html.Raw(""))"><i class="fa fa-table me-2"></i>Tables</a>
                     @*<a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>*@
                     <div class="nav-item dropdown">

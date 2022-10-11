@@ -38,8 +38,8 @@
                         @Html.DisplayFor(modelItem => item.ProductPrice)
                     </h6>
                 </div>
-                <a href="javascript:void(0)" class="btn btn-danger mb-2">
-                    Add to Cart
+                <a asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-id="@item.ProductId" class="btn btn-danger mb-2">
+                    Add To Cart
                 </a>
             </div>
         </div>

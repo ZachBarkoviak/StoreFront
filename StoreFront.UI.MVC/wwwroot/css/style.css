@@ -79,7 +79,6 @@
 .content {
     margin-left: 250px;
     min-height: 100vh;
-    background: var(--dark);
     transition: 0.5s;
 }
 
@@ -293,7 +292,21 @@
     padding: 5px;
 }
 
+.hero-area{
+    background: url(../img/landingPage.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    background-color: none;
+}
 
+.intro-content {
+    border-radius: 15px;
+}
+
+.fpic {
+    border-radius: 15px;
+}
 
 /*ATTEMPTING TO ADD THE FLOAT UP ON THE TILE OPTIONS FROM GADGET STORE... JUST DO IT YOURSELF!*/
 /*.product_section.heading_container {
