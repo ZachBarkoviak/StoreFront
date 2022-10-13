@@ -1,0 +1,109 @@
+﻿@model Dictionary<int, CartItemViewModel>
+
+
+@{
+    ViewData["Title"] = "Cart";
+    decimal? cartTotal = 0;
+    int? cartProducts = 0;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3 pt-3 pb-3 text-center">
+            <h2>
+                Shopping Cart
+            </h2>
+
+            <p>
+                <a asp-action="TiledView" asp-controller="Products" class="btn btn-primary mt-2">
+                    Back to Ships
+                </a>
+            </p>
+        </div>
+    </div>
+    @if (Model.Count == 0)
+    {
+        @*Nothing in the cart*@
+        <p class="alert alert-secondary text-center">
+            @ViewBag.Message
+        </p>
+    }
+    else
+    {
+        <div class="bg-secondary rounded w-100 p-4 text-center">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="text-center">Quantity</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th class=""></th>
+                    </tr>
+                </thead>
+
+                <tbody class="align-middle p-2">
+                    @foreach (var item in Model)
+                    {
+                        <tr class="px-2">
+                            <td>
+                                <img src="~/img/t_@item.Value.CartProd.ProductImage" alt="@item.Value.CartProd.ProductDescription" class="img-fluid productImg" />
+                            </td>
+                            <td >
+                                @*item.Value.Qty*@
+                                <form asp-action="UpdateCart">
+                                    <input type="hidden" name="productId" value="@item.Value.CartProd.ProductId" />
+                                    <input type="number" min="1" max="@item.Value.CartProd.StockQty" name="qty" autocomplete="off" value="@item.Value.Qty" class="form-control d-block mx-auto pr-1 text-center" />
+                                    <input type="submit" value="Update Cart" class="btn btn-primary btn-sm mt-2 shadow-sm" />
+                                </form>
+                            </td>
+                            <td>
+                                @item.Value.CartProd.ProductName
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Value.CartProd.ProductPrice)
+                            </td>
+                            <td>
+                                @{
+                                    decimal? total = (decimal)item.Value.CartProd.ProductPrice * (decimal)item.Value.Qty;
+                                    if (total != 0){
+                                        cartTotal += total;
+                                    }
+                                    cartProducts += item.Value.Qty;
+                                }
+                                @string.Format("{0:C}", total)
+                            </td>
+                            <td>
+                                <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.Value.CartProd.ProductId" class="btn btn-danger shadow-sm">
+                                    Remove from cart
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <hr />
+            <div class="border border-danger pt-2 rounded">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th># Of Products</th>
+                            <th>Total</th>
+                            <th class=""></th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="align-middle p-2">
+                            <tr class="px-2">
+                                <td>@string.Format($"{cartProducts}")</td>
+                                <td>@string.Format($"{cartTotal:c}")</td>
+                                <td></td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+

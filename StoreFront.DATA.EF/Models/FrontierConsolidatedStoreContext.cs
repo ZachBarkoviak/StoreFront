@@ -24,6 +24,8 @@ namespace StoreFront.DATA.EF.Models
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Manufacturer> Manufacturers { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<OrderProduct> OrderProducts { get; set; } = null!;
         public virtual DbSet<Planet> Planets { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<UserDetail> UserDetails { get; set; } = null!;
@@ -162,6 +164,44 @@ namespace StoreFront.DATA.EF.Models
                     .HasForeignKey(d => d.ManufacturerPlanetId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Manufacturer_Planets");
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.Property(e => e.OrderId).ValueGeneratedNever();
+
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ShipToName)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId).HasMaxLength(128);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Orders_UserDetail");
+            });
+
+            modelBuilder.Entity<OrderProduct>(entity =>
+            {
+                entity.Property(e => e.OrderProductId).ValueGeneratedNever();
+
+                entity.Property(e => e.ProductPrice).HasColumnType("money");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.OrderProducts)
+                    .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderProducts_Orders");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.OrderProducts)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderProducts_Products");
             });
 
             modelBuilder.Entity<Planet>(entity =>

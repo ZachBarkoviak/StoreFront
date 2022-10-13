@@ -185,7 +185,7 @@ namespace StoreFront.UI.MVC.Controllers
                     string[] validExts = { ".jpeg", ".jpg", ".png", ".gif" };
 
                     //check file extension to make sure it is valid and check the file size
-                    if (validExts.Contains(ext.ToLower()) && product.Image.Length < 4_194_303)
+                    if (validExts.Contains(ext.ToLower()) && product.Image.Length < 5_000_000)
                     {
                         //generate a unique file name
                         product.ProductImage = Guid.NewGuid() + ext;

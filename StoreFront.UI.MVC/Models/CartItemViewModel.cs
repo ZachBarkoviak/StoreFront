@@ -1,6 +1,6 @@
 ﻿using StoreFront.DATA.EF.Models;
 
-namespace GadgetStore.UI.MVC.Models
+namespace StoreFront.UI.MVC.Models
 {
     public class CartItemViewModel
     {

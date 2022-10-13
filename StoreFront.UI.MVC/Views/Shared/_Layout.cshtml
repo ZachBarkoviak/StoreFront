@@ -11,6 +11,9 @@
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/76e8a01444.js" crossorigin="anonymous"></script>
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,13 +71,13 @@
                     <a href="@Url.Action("Table", "Home")" class="nav-item nav-link @(ViewData["Title"] == "Table" ? Html.Raw("active") : Html.Raw(""))"><i class="fa fa-table me-2"></i>Tables</a>
                     @*<a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>*@
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle @(ViewData["Title"] == "Sign In" || ViewData["Title"] == "Sign Up" ? Html.Raw("active") : Html.Raw(""))" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle @(ViewData["Title"] == "Sign In" || ViewData["Title"] == "Sign Up" ? Html.Raw("active") : Html.Raw(""))" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Links</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <partial name="_LoginPartial" />
-                            @*<a href="@Url.Action("SignIn", "Home")" class="dropdown-item">Sign In</a>
-                            <a href="@Url.Action("SignUp", "Home")" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>*@
+                            @*<partial name="_LoginPartial" />
+                            <a href="@Url.Action("SignIn", "Home")" class="dropdown-item">Sign In</a>
+                            <a href="@Url.Action("SignUp", "Home")" class="dropdown-item">Sign Up</a>*@
+                            <a href="https://discord.gg/frcn" target="_blank" class="dropdown-item"><i class="fa-brands fa-discord"></i>  Discord</a>
+                            <a href="https://robertsspaceindustries.com/orgs/FRCN" target="_blank" class="dropdown-item"><i class="fa-solid fa-shuttle-space"></i>  RSI Org Page</a>
                         </div>
                     </div>
                 </div>
