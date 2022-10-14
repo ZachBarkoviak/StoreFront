@@ -23,6 +23,6 @@ namespace StoreFront.DATA.EF.Models
 
         public virtual Category? Category { get; set; }
         public virtual Manufacturer? Manufacturer { get; set; }
-        public virtual ICollection<OrderProduct>? OrderProducts { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

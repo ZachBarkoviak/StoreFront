@@ -4,8 +4,8 @@ using StoreFront.DATA.EF.Models;
 using Microsoft.AspNetCore.Identity;
 using StoreFront.UI.MVC.Models;
 using Newtonsoft.Json;
-using StoreFront.UI.MVC.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace StoreFront.UI.MVC.Controllers
 {
@@ -176,5 +176,52 @@ namespace StoreFront.UI.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //This method must be async in order to invoke the UserManager's async methods in this action.
+        public async Task<IActionResult> SubmitOrder()
+        {
+            string? userId = (await _userManager.GetUserAsync(HttpContext.User))?.Id;
+
+            UserDetail ud = _context.UserDetails.Find(userId);
+
+            //Create Order Object
+            Order o = new Order()
+            {
+                UserId = userId,
+                OrderDate = DateTime.Now,
+                ShipToName = ud.FirstName + " " + ud.LastName,
+                ShipToPlanetId = ud.PlanetId
+            };
+
+            // Add the Order to _context
+            _context.Orders.Add(o);
+
+            // Retrieve the session cart and convert to C#
+            string sessionCart = HttpContext.Session.GetString("cart");
+            Dictionary<int, CartItemViewModel> shoppingCart = JsonConvert.DeserializeObject<Dictionary<int, CartItemViewModel>>(sessionCart);
+
+            //Create OrderProduct for every item in our cart
+            foreach (var item in shoppingCart)
+            {
+                OrderProduct op = new OrderProduct()
+                {                    
+                    ProductId = item.Value.CartProd.ProductId,
+                    OrderId = o.OrderId,
+                    Quantity = (short)item.Value.Qty,
+                    ProductPrice = item.Value.CartProd.ProductPrice
+                };
+
+                //ONLY need to add items to an existing entity (here -> the order 'o') if the items are a related record (like the OrderProduct here)
+                o.OrderProducts.Add(op);
+
+            }
+
+            //save changes to DB
+            _context.SaveChanges();
+            HttpContext.Session.Remove("cart");
+
+            return RedirectToAction("Index", "Orders");
+        }
+
     }
 }

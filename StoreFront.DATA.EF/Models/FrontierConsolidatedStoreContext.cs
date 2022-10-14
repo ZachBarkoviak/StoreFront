@@ -132,9 +132,7 @@ namespace StoreFront.DATA.EF.Models
 
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.Property(e => e.CategoryId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("CategoryID");
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
                 entity.Property(e => e.CategoryDescription)
                     .HasMaxLength(500)
@@ -149,9 +147,7 @@ namespace StoreFront.DATA.EF.Models
             {
                 entity.ToTable("Manufacturer");
 
-                entity.Property(e => e.ManufacturerId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ManufacturerID");
+                entity.Property(e => e.ManufacturerId).HasColumnName("ManufacturerID");
 
                 entity.Property(e => e.ContactName).HasMaxLength(20);
 
@@ -168,8 +164,6 @@ namespace StoreFront.DATA.EF.Models
 
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.Property(e => e.OrderId).ValueGeneratedNever();
-
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ShipToName)
@@ -187,8 +181,6 @@ namespace StoreFront.DATA.EF.Models
 
             modelBuilder.Entity<OrderProduct>(entity =>
             {
-                entity.Property(e => e.OrderProductId).ValueGeneratedNever();
-
                 entity.Property(e => e.ProductPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.Order)
@@ -215,9 +207,7 @@ namespace StoreFront.DATA.EF.Models
 
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.ProductId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ProductID");
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 

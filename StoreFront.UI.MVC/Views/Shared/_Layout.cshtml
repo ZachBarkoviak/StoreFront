@@ -68,7 +68,7 @@
                     </div>*@
                     @*<a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>*@
                     <a asp-action="TiledView" asp-controller="Products" class="nav-item nav-link @(ViewData["Title"] == "Shop" ? Html.Raw("active") : Html.Raw(""))"><i class="fa fa-laptop me-2"></i>Shop</a>
-                    <a href="@Url.Action("Table", "Home")" class="nav-item nav-link @(ViewData["Title"] == "Table" ? Html.Raw("active") : Html.Raw(""))"><i class="fa fa-table me-2"></i>Tables</a>
+                    <a asp-action="Index" asp-controller="ShoppingCart" class="nav-item nav-link @(ViewData["Title"] == "Cart" ? Html.Raw("active") : Html.Raw(""))"><i class="fa fa-cart-shopping me-2"></i>Cart</a>
                     @*<a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>*@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle @(ViewData["Title"] == "Sign In" || ViewData["Title"] == "Sign Up" ? Html.Raw("active") : Html.Raw(""))" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Links</a>
